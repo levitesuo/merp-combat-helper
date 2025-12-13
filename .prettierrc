@@ -1,0 +1,21 @@
+{
+	"printWidth": 100,
+	"tabWidth": 2,
+	"useTabs": true,
+	"semi": true,
+	"singleQuote": true,
+	"trailingComma": "all",
+	"bracketSpacing": true,
+	"arrowParens": "always",
+	"endOfLine": "lf",
+	"plugins": ["@trivago/prettier-plugin-sort-imports"],
+	"importOrder": [
+		"^react",
+		"<THIRD_PARTY_MODULES>",
+		"^@mui/icons-material/(.*)$",
+		"^.*/typesAndInterfaces/(.*)$",
+		"^[./]"
+	],
+	"importOrderSeparation": true,
+	"importOrderSortSpecifiers": true
+}
