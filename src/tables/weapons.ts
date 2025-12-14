@@ -1,3 +1,7 @@
+import crossbowSvg from '../assets/crossbow-svgrepo-com.svg';
+import netSvg from '../assets/fishing-net-svgrepo-com.svg';
+import slingSvg from '../assets/slingshot-svgrepo-com.svg';
+
 export interface Weapon {
 	id: string;
 	category?: string;
@@ -115,7 +119,7 @@ const weapons: Weapon[] = [
 		id: 'net',
 		category: '1-Handed Concussion',
 		name: 'Net',
-		iconUrl: 'https://api.iconify.design/mdi:net.svg',
+		iconUrl: netSvg,
 		fumbleRange: '1-6',
 		primaryCritical: 'Grapple',
 		secondaryCritical: '—',
@@ -279,7 +283,7 @@ const weapons: Weapon[] = [
 		id: 'crossbow',
 		category: 'Missile Weapons',
 		name: 'Crossbow',
-		iconUrl: 'https://api.iconify.design/mdi:crossbow.svg',
+		iconUrl: crossbowSvg,
 		fumbleRange: '1-5',
 		primaryCritical: 'Puncture',
 		secondaryCritical: '—',
@@ -315,7 +319,7 @@ const weapons: Weapon[] = [
 		id: 'sling',
 		category: 'Missile Weapons',
 		name: 'Sling',
-		iconUrl: 'https://api.iconify.design/mdi:slingshot.svg',
+		iconUrl: slingSvg,
 		fumbleRange: '1-6',
 		primaryCritical: 'Crush(D)',
 		secondaryCritical: '—',

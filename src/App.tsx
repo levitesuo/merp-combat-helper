@@ -285,7 +285,7 @@ function App() {
 			effectOutput += `\n\n${fumbleResult.effect}`;
 			setAdditionalEffect(effectOutput);
 		} else if (secondRollType === 'critical') {
-			let critType = result.match(/Critical: ([A-E])/)?.[1] || 'B';
+			let critType = result.match(/Critical: ([A-E])/)?.[1] || 'E';
 			
 			// Use primary critical type from weapon
 			const primaryCrit = selectedWeapon.primaryCritical || 'Slash';
