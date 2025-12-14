@@ -24,33 +24,63 @@ const getAttackTableName = (category: string | undefined): string => {
 	return '1-Handed Slashing'; // default
 };
 
+// Get fumble modifier based on weapon category
+const getFumbleModifier = (weaponCategory: string[] | undefined): number => {
+	console.log('Calculating fumble modifier for categories:', weaponCategory);
+	if (!weaponCategory) return 0;
+	
+	// Hand Arms modifiers (FT-1)
+	if (weaponCategory.includes('1-Handed Concussion')) return -20;
+	if (weaponCategory.includes('1-Handed Edged')) return -10;
+	if (weaponCategory.includes('2-Handed')) {
+		// Check if mounted
+		if (weaponCategory.includes('Mounted')) return 20;
+		return 0;
+	}
+	if (weaponCategory.includes('Pole Arms')) return 10;
+	
+	// Missile Weapons modifiers (FT-2)
+	if (weaponCategory.includes('Sling')) return -10;
+	if (weaponCategory.includes('Short Bow')) return 0;
+	if (weaponCategory.includes('Composite')) return 10;
+	if (weaponCategory.includes('Long Bow')) return 10;
+	if (weaponCategory.includes('Crossbow')) return 20;
+	
+	return 0;
+};
+
 // Get fumble result from table
-const getFumbleResult = (roll: number, weaponCategory: string | undefined): string => {
+const getFumbleResult = (roll: number, weaponCategory: string[] | undefined): { effect: string; modifier: number; modifiedRoll: number } => {
 	// Determine which fumble table to use
-	const isMissile = weaponCategory?.includes('Missile') || weaponCategory?.includes('Bow') || weaponCategory?.includes('Crossbow');
+	const isMissile = weaponCategory?.includes('Missile') || weaponCategory?.includes('Bow') || weaponCategory?.includes('Crossbow') || weaponCategory?.includes('Sling');
 	const tableName = isMissile ? 'Missile Weapons' : 'Hand Arms';
 	const table = fumbleTables[tableName];
 	
-	if (!table) return 'No fumble table found';
+	if (!table) return { effect: 'No fumble table found', modifier: 0, modifiedRoll: roll };
+	
+	// Apply fumble modifier
+	const modifier = getFumbleModifier(weaponCategory);
+	console.log('Fumble modifier:', modifier);
+	const modifiedRoll = roll + modifier;
 	
 	// Find matching range or use edge ranges
-	if (roll <= table[0].range[1]) {
-		return table[0].effect;
+	if (modifiedRoll <= table[0].range[1]) {
+		return { effect: table[0].effect, modifier, modifiedRoll };
 	}
 	
 	const lastEntry = table[table.length - 1];
-	if (roll >= lastEntry.range[0]) {
-		return lastEntry.effect;
+	if (modifiedRoll >= lastEntry.range[0]) {
+		return { effect: lastEntry.effect, modifier, modifiedRoll };
 	}
 	
 	for (const row of table) {
 		const [min, max] = row.range;
-		if (roll >= min && roll <= max) {
-			return row.effect;
+		if (modifiedRoll >= min && modifiedRoll <= max) {
+			return { effect: row.effect, modifier, modifiedRoll };
 		}
 	}
 	
-	return 'No fumble effect found';
+	return { effect: 'No fumble effect found', modifier, modifiedRoll };
 };
 
 // Parse critical type from weapon field (e.g., "Slash", "Puncture(C)", "Crush")
@@ -237,8 +267,22 @@ function App() {
 		let effectOutput = '';
 		
 		if (secondRollType === 'fumble') {
-			const fumbleEffect = getFumbleResult(roll, selectedWeapon.category);
-			effectOutput = `Fumble Roll: ${roll}\n\n${fumbleEffect}`;
+			const fumbleResult = getFumbleResult(roll, [selectedWeapon.category ?? '', selectedWeapon.name]);
+			const isMissile = selectedWeapon.category?.includes('Missile') || 
+			                  selectedWeapon.category?.includes('Bow') || 
+			                  selectedWeapon.category?.includes('Crossbow') || 
+			                  selectedWeapon.category?.includes('Sling');
+			const fumbleTableType = isMissile ? 'Missile Weapons' : 'Hand Arms';
+			
+			effectOutput = `Fumble Roll: ${roll}`;
+			if (fumbleResult.modifier !== 0) {
+				effectOutput += ` ${fumbleResult.modifier > 0 ? '+' : ''}${fumbleResult.modifier} = ${fumbleResult.modifiedRoll}`;
+			}
+			effectOutput += `\nFumble Table: ${fumbleTableType}`;
+			if (fumbleResult.modifier !== 0) {
+				effectOutput += `\nWeapon Modifier: ${fumbleResult.modifier > 0 ? '+' : ''}${fumbleResult.modifier}`;
+			}
+			effectOutput += `\n\n${fumbleResult.effect}`;
 			setAdditionalEffect(effectOutput);
 		} else if (secondRollType === 'critical') {
 			let critType = result.match(/Critical: ([A-E])/)?.[1] || 'B';
