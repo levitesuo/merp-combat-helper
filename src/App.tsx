@@ -89,7 +89,7 @@ const parseCriticalType = (critString: string | undefined): { type: string; seve
 	
 	const match = critString.match(/^([A-Za-z]+)(?:\(([A-E])\))?$/);
 	if (match) {
-		return { type: match[1], severity: match[2] || 'B' }; // Default to B if not specified
+		return { type: match[1], severity: match[2] || 'E' }; // Default to B if not specified
 	}
 	return { type: critString, severity: 'B' };
 };
