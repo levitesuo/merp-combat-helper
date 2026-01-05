@@ -7,7 +7,6 @@ export interface Weapon {
 	category?: string;
 	name: string;
 	iconUrl?: string;
-	fumbleRange?: string;
 	primaryCritical?: string;
 	secondaryCritical?: string;
 	baseRange?: string;

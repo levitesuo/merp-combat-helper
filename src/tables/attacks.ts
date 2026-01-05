@@ -5,11 +5,11 @@ export interface AttackResultValue {
 
 export interface AttackResult {
 	range: [number, number];
-	plate: AttackResultValue | 'Fumble';
-	chain: AttackResultValue | 'Fumble';
-	rigidLeather: AttackResultValue | 'Fumble';
-	softLeather: AttackResultValue | 'Fumble';
-	none: AttackResultValue | 'Fumble';
+	plate: AttackResultValue;
+	chain: AttackResultValue;
+	rigidLeather: AttackResultValue;
+	softLeather: AttackResultValue;
+	none: AttackResultValue;
 }
 
 export interface AttackTables {
@@ -18,7 +18,7 @@ export interface AttackTables {
 
 const attackTables: AttackTables = {
 	'1-Handed Slashing': [
-		{ range: [1, 8], plate: 'Fumble', chain: 'Fumble', rigidLeather: 'Fumble', softLeather: 'Fumble', none: 'Fumble' },
+		{ range: [1, 8], plate: { damage: 0, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
 		{ range: [9, 45], plate: { damage: 0, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
 		{ range: [46, 50], plate: { damage: 1, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
 		{ range: [51, 55], plate: { damage: 1, crit: null }, chain: { damage: 1, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
@@ -43,7 +43,7 @@ const attackTables: AttackTables = {
 		{ range: [146, 150], plate: { damage: 12, crit: 'E' }, chain: { damage: 18, crit: 'E' }, rigidLeather: { damage: 22, crit: 'E' }, softLeather: { damage: 25, crit: 'E' }, none: { damage: 30, crit: 'E' } }
 	],
 	'1-Handed Concussion': [
-		{ range: [1, 8], plate: 'Fumble', chain: 'Fumble', rigidLeather: 'Fumble', softLeather: 'Fumble', none: 'Fumble' },
+		{ range: [1, 8], plate: { damage: 0, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
 		{ range: [9, 30], plate: { damage: 0, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
 		{ range: [36, 40], plate: { damage: 1, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
 		{ range: [41, 45], plate: { damage: 1, crit: null }, chain: { damage: 1, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
@@ -70,7 +70,7 @@ const attackTables: AttackTables = {
 		{ range: [146, 150], plate: { damage: 16, crit: 'E' }, chain: { damage: 22, crit: 'E' }, rigidLeather: { damage: 20, crit: 'E' }, softLeather: { damage: 20, crit: 'E' }, none: { damage: 23, crit: 'E' } }
 	],
 	'2-Handed Weapons': [
-		{ range: [1, 8], plate: 'Fumble', chain: 'Fumble', rigidLeather: 'Fumble', softLeather: 'Fumble', none: 'Fumble' },
+		{ range: [1, 8], plate: { damage: 0, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
 		{ range: [9, 55], plate: { damage: 0, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
 		{ range: [56, 60], plate: { damage: 2, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
 		{ range: [61, 65], plate: { damage: 3, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
@@ -93,7 +93,7 @@ const attackTables: AttackTables = {
 		{ range: [146, 150], plate: { damage: 22, crit: 'E' }, chain: { damage: 33, crit: 'E' }, rigidLeather: { damage: 40, crit: 'E' }, softLeather: { damage: 43, crit: 'E' }, none: { damage: 48, crit: 'E' } }
 	],
 	'Missile Weapons': [
-		{ range: [1, 8], plate: 'Fumble', chain: 'Fumble', rigidLeather: 'Fumble', softLeather: 'Fumble', none: 'Fumble' },
+		{ range: [1, 8], plate: { damage: 0, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
 		{ range: [9, 70], plate: { damage: 0, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
 		{ range: [71, 75], plate: { damage: 1, crit: null }, chain: { damage: 0, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 0, crit: null }, none: { damage: 0, crit: null } },
 		{ range: [76, 80], plate: { damage: 2, crit: null }, chain: { damage: 2, crit: null }, rigidLeather: { damage: 0, crit: null }, softLeather: { damage: 4, crit: null }, none: { damage: 0, crit: null } },

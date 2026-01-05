@@ -92,7 +92,6 @@ const WeaponBox = (weapon: WeaponBoxProps) => {
 						<Table size="small">
 							<TableBody>
 								<WeaponStat label="Category" value={weapon.category} />
-								<WeaponStat label="Fumble Range" value={weapon.fumbleRange} />
 								<WeaponStat label="Primary Critical" value={weapon.primaryCritical} />
 								<WeaponStat label="Secondary Critical" value={weapon.secondaryCritical} />
 								<WeaponStat label="Base Range" value={weapon.baseRange} />
